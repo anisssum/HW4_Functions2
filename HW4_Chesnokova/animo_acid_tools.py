@@ -1,10 +1,12 @@
 AMINO_ACIDS = 'ARNDCEQGHILKMFPSTWYVUOarndceqghilkmfpstwyvuo'
 SHORT_CODE = list(AMINO_ACIDS)
 LONG_CODE = ['Ala', 'Arg', 'Asn', 'Asp', 'Cys', 'Glu', 'Gln', 'Gly', 'His', 'Ile', 'Leu', 'Lys', 'Met', 'Phe', 'Pro',
-             'Ser', 'Thr', 'Trp', 'Tyr', 'Val', 'Sec', 'Pyl', 'Ala', 'Arg', 'Asn', 'Asp', 'Cys', 'Glu', 'Gln', 'Gly', 'His', 'Ile', 'Leu', 'Lys', 'Met', 'Phe', 'Pro',
+             'Ser', 'Thr', 'Trp', 'Tyr', 'Val', 'Sec', 'Pyl',
+             'Ala', 'Arg', 'Asn', 'Asp', 'Cys', 'Glu', 'Gln', 'Gly', 'His', 'Ile', 'Leu', 'Lys', 'Met', 'Phe', 'Pro',
              'Ser', 'Thr', 'Trp', 'Tyr', 'Val', 'Sec', 'Pyl']
 MASSE = [71.08, 156.2, 114.1, 115.1, 103.1, 129.1, 128.1, 57.05, 137.1, 113.2, 113.2, 128.2, 131.2, 147.2, 97.12, 87.08,
-         101.1, 186.2, 163.2, 99.13, 168.05, 255.3, 71.08, 156.2, 114.1, 115.1, 103.1, 129.1, 128.1, 57.05, 137.1, 113.2, 113.2, 128.2, 131.2, 147.2, 97.12, 87.08,
+         101.1, 186.2, 163.2, 99.13, 168.05, 255.3,
+         71.08, 156.2, 114.1, 115.1, 103.1, 129.1, 128.1, 57.05, 137.1, 113.2, 113.2, 128.2, 131.2, 147.2, 97.12, 87.08,
          101.1, 186.2, 163.2, 99.13, 168.05, 255.3]
 
 
@@ -82,6 +84,7 @@ def seq_charge(seq: str) -> str:
             seq (str): amino acid sequence of proteinogenic amino acids
         Returns:
             (str): "positive", "negative" or "neutral"
+    Function realized by Anna Chesnokova
     """
     aminoacid_charge = {'R': 1, 'D': -1, 'E': -1, 'K': 1, 'O': 1, 'r': 1, 'd': -1, 'e': -1, 'k': 1, 'o': 1}
     charge = 0
@@ -121,31 +124,34 @@ def amino_acid_tools(*args: str):
             The function must accept an unlimited number of protein sequences (str) as input,
             the last  variable must be the function (str) you want to execute.
             The amino acid sequence can consist of both uppercase and lowercase letters.
-            Input example:
-    	        amino_acid_tools('PLPKVEL','VDviRIkLQ','PPDFGKT','folding')
-    	    Function:
-    	        molecular_weight: calculates molecular weight of the amino acid chain
-    	        three_letter_code: converts single letter translations to three letter translations
-    	        show_length: counts the number of amino acids in the given sequence
-    	        folding: counts the number of amino acids characteristic separately for alpha helixes and beta sheets,
-    	                  and gives out what will be the structure of the protein more
+        Input example:
+            amino_acid_tools('PLPKVEL','VDviRIkLQ','PPDFGKT','folding')
+        Function:
+            molecular_weight: calculates molecular weight of the amino acid chain
+            three_letter_code: converts single letter translations to three letter translations
+            show_length: counts the number of amino acids in the given sequence
+            folding: counts the number of amino acids characteristic separately for alpha helixes and beta sheets,
+                    and gives out what will be the structure of the protein more
+            seq_charge: evaluates the overall charge of the aminoacid chain in neutral aqueous solution (pH = 7)
 
         Returns:
             If one sequence is supplied, a string with the result is returned.
             If several are submitted, a list of strings is returned.
-    	    Depending on the function performed, the following returns will occur:
-    	        molecular_weight (int) or (list): amino acid sequence molecular weight number or list of numbers
-    	        three_letter_code (str) or (list): translated sequence from one-letter in three-letter code
-    	        show_length (int) or (list): integer number of amino acid residues
-    	        folding (str) or (list): 'alpha_helix', if there are more alpha helices
-    	                                 'beta_sheet', if there are more beta sheets
-    	                                 'equally', if the probability of alpha spirals and beta sheets are the same
+            Depending on the function performed, the following returns will occur:
+                molecular_weight (int) or (list): amino acid sequence molecular weight number or list of numbers
+                three_letter_code (str) or (list): translated sequence from one-letter in three-letter code
+                show_length (int) or (list): integer number of amino acid residues
+                folding (str) or (list): 'alpha_helix', if there are more alpha helices
+                                        'beta_sheet', if there are more beta sheets
+                                        'equally', if the probability of alpha spirals and beta sheets are the same
+                seq_charge(str) or (list): "positive", "negative" or "neutral"
     """
     *seqs, function = args
-    d_of_functions = {'molecular_weight': molecular_weight, 
+    d_of_functions = {'molecular_weight': molecular_weight,
                       'three_letter_code': three_letter_code,
                       'show_length': show_length,
-                      'folding': folding}
+                      'folding': folding,
+                      'seq charge': seq_charge}
     answer = []
     aminoacid_seqs = aminoacid_seqs_only(seqs)
     for sequence in aminoacid_seqs:
