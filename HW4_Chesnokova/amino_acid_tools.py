@@ -144,14 +144,14 @@ def amino_acid_tools(*args: str):
                 folding (str) or (list): 'alpha_helix', if there are more alpha helices
                                         'beta_sheet', if there are more beta sheets
                                         'equally', if the probability of alpha spirals and beta sheets are the same
-                seq_charge(str) or (list): "positive", "negative" or "neutral"
+                			seq_charge(str) or (list): "positive", "negative" or "neutral"
     """
     *seqs, function = args
     d_of_functions = {'molecular_weight': molecular_weight,
                       'three_letter_code': three_letter_code,
                       'show_length': show_length,
                       'folding': folding,
-                      'seq charge': seq_charge}
+                      'seq_charge': seq_charge}
     answer = []
     aminoacid_seqs = aminoacid_seqs_only(seqs)
     for sequence in aminoacid_seqs:
